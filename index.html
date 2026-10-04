@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b1220">
+<title>DAPIL IX IMPACT 2027</title>
+<style>
+:root{
+  --bg:#07101d;--panel:#0d1728;--panel2:#111e32;--line:#24344d;
+  --text:#edf4ff;--muted:#93a4bb;--blue:#3b82f6;--green:#22c55e;
+  --yellow:#f59e0b;--red:#ef4444;--cyan:#06b6d4;--white:#fff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(135deg,#06101c,#0a1424 55%,#08111f);
+ color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.topbar{position:sticky;top:0;z-index:100;height:64px;background:rgba(7,16,29,.94);
+ backdrop-filter:blur(16px);border-bottom:1px solid var(--line);display:flex;align-items:center;
+ justify-content:space-between;padding:0 16px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.3px}
+.logo{width:38px;height:38px;border-radius:11px;background:linear-gradient(145deg,#2563eb,#06b6d4);
+ display:grid;place-items:center;font-weight:900;color:#fff}
+.brand small{display:block;color:var(--muted);font-weight:500;font-size:10px;margin-top:2px}
+.burger{width:42px;height:42px;border:1px solid var(--line);border-radius:11px;background:var(--panel);
+ color:var(--text);cursor:pointer;font-size:23px}
+.drawer{position:fixed;z-index:99;right:-290px;top:64px;width:270px;height:calc(100vh - 64px);
+ background:#0a1424;border-left:1px solid var(--line);padding:18px;transition:.25s;box-shadow:-15px 0 40px #0005}
+.drawer.open{right:0}
+.drawer a{display:block;padding:13px 12px;border-radius:9px;color:#c9d5e6;margin-bottom:5px}
+.drawer a:hover{background:#14233a;color:#fff}
+.overlay{display:none;position:fixed;inset:64px 0 0;background:#0008;z-index:98}
+.overlay.show{display:block}
+.container{max-width:1280px;margin:auto;padding:20px 16px 50px}
+.hero{padding:22px 4px 20px}
+.kicker{color:#60a5fa;text-transform:uppercase;font-size:11px;font-weight:800;letter-spacing:1.5px}
+h1{font-size:clamp(28px,5vw,46px);margin:7px 0 5px;line-height:1.05}
+.hero p{color:var(--muted);max-width:780px;margin:0;line-height:1.6}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.badge{border:1px solid var(--line);background:#0c182a;border-radius:999px;padding:7px 11px;font-size:11px;color:#cbd7e8}
+.grid{display:grid;gap:12px}
+.kpis{grid-template-columns:repeat(4,1fr)}
+.card{background:linear-gradient(145deg,rgba(17,30,50,.98),rgba(10,21,36,.98));
+ border:1px solid var(--line);border-radius:15px;padding:16px;box-shadow:0 8px 30px #0002}
+.kpi .value{font-size:28px;font-weight:850;margin:5px 0}
+.kpi .label{font-size:11px;color:var(--muted)}
+.kpi .accent{font-size:11px;color:#60a5fa}
+.section{margin-top:28px;scroll-margin-top:78px}
+.section-title{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:12px}
+h2{font-size:19px;margin:0}
+.section-title span{font-size:11px;color:var(--muted)}
+.programs{grid-template-columns:repeat(4,1fr)}
+.program{min-height:145px}
+.num{font-size:11px;color:#60a5fa;font-weight:800}
+.program h3{font-size:15px;margin:7px 0}
+.program p{font-size:12px;color:var(--muted);line-height:1.5;margin:0}
+.months{grid-template-columns:repeat(3,1fr)}
+.month h3{margin:0 0 10px;font-size:15px;color:#dce8f7}
+.month ul{padding-left:17px;margin:0;color:#b8c6d8;font-size:12px;line-height:1.65}
+.month li{margin:3px 0}
+.month strong{color:#fff}
+.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:13px}
+table{border-collapse:collapse;width:100%;min-width:780px;font-size:11px}
+th,td{padding:10px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#111e32;color:#9fb2ca;position:sticky;top:0}
+td{color:#d2dcea}
+tr:last-child td{border-bottom:0}
+.pill{display:inline-block;border-radius:999px;padding:4px 7px;background:#13233a;color:#a9c5e8;margin:2px;font-size:10px}
+.regions{grid-template-columns:repeat(3,1fr)}
+.region h3{margin:0 0 6px}.region p{font-size:12px;color:var(--muted);line-height:1.5;margin:0}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.flow div{padding:14px 8px;text-align:center;border:1px solid var(--line);border-radius:11px;background:#0c182a;font-size:11px}
+.flow b{display:block;font-size:17px;color:#60a5fa;margin-bottom:5px}
+.budget{grid-template-columns:1fr 1fr}
+.bar{height:8px;background:#17263c;border-radius:99px;overflow:hidden;margin-top:7px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#2563eb,#06b6d4)}
+.note{font-size:11px;color:#91a3ba;line-height:1.55}
+.footer{border-top:1px solid var(--line);margin-top:35px;padding-top:20px;color:#73869e;font-size:10px;line-height:1.6}
+.search{width:100%;background:#091526;border:1px solid var(--line);color:#fff;padding:11px 12px;border-radius:10px;outline:none}
+@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.programs{grid-template-columns:repeat(2,1fr)}.months{grid-template-columns:1fr 1fr}.flow{grid-template-columns:1fr 1fr}.budget{grid-template-columns:1fr}}
+@media(max-width:600px){
+ .container{padding:14px 11px 40px}.hero{padding:15px 3px}
+ h1{font-size:29px}.kpis{grid-template-columns:repeat(2,1fr);gap:8px}
+ .card{padding:13px;border-radius:13px}.kpi .value{font-size:24px}
+ .programs,.months,.regions{grid-template-columns:1fr}
+ .section{margin-top:22px}.section-title{align-items:start;flex-direction:column;gap:4px}
+ .flow{grid-template-columns:1fr}.flow div{text-align:left;display:flex;align-items:center;gap:10px}.flow b{margin:0}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">IX</div>
+    <div>DAPIL IX IMPACT 2027<small>Master Program Konstituen • Jawa Tengah</small></div>
+  </div>
+  <button class="burger" id="burger" aria-label="Buka menu">☰</button>
+</header>
+
+<nav class="drawer" id="drawer">
+  <a href="#overview">Dashboard</a>
+  <a href="#program">8 Program Induk</a>
+  <a href="#calendar">Kalender 2027</a>
+  <a href="#activities">48 Kegiatan</a>
+  <a href="#regions">Wilayah</a>
+  <a href="#partners">Mitra Strategis</a>
+  <a href="#aspirasi">Sistem Aspirasi</a>
+  <a href="#kpi">KPI & Impact</a>
+  <a href="#budget">Konsep Anggaran</a>
+  <a href="#accountability">Akuntabilitas</a>
+</nav>
+<div class="overlay" id="overlay"></div>
+
+<main class="container">
+
+<section class="hero" id="overview">
+  <div class="kicker">Master Plan • Tahun 2027</div>
+  <h1>Ekonomi Rakyat • Keuangan Aman • Aspirasi Terkawal</h1>
+  <p>
+    Dashboard satu halaman untuk merangkum rencana kegiatan konstituen Dapil IX Jawa Tengah
+    dengan prinsip <b>Dengar → Data → Tindaklanjut → Ukur</b>.
+  </p>
+  <div class="badges">
+    <span class="badge">Kota Tegal</span><span class="badge">Kabupaten Tegal</span>
+    <span class="badge">Kabupaten Brebes</span><span class="badge">48 Kegiatan</span>
+    <span class="badge">12 Bulan</span>
+  </div>
+</section>
+
+<section class="grid kpis">
+  <div class="card kpi"><div class="label">RENCANA KEGIATAN</div><div class="value">48</div><div class="accent">4 kegiatan/bulan</div></div>
+  <div class="card kpi"><div class="label">TARGET PESERTA</div><div class="value">10.000+</div><div class="accent">masyarakat & pelaku usaha</div></div>
+  <div class="card kpi"><div class="label">TARGET UMKM</div><div class="value">3.000+</div><div class="accent">terjangkau sepanjang tahun</div></div>
+  <div class="card kpi"><div class="label">ASPIRASI</div><div class="value">1.000+</div><div class="accent">terdokumentasi</div></div>
+</section>
+
+<section class="section" id="program">
+<div class="section-title"><h2>8 Program Induk</h2><span>Kerangka utama 2027</span></div>
+<div class="grid programs">
+  <div class="card program"><div class="num">01</div><h3>Economic Clinic</h3><p>Klinik ekonomi, UMKM, pembiayaan, legalitas dan pengembangan usaha.</p></div>
+  <div class="card program"><div class="num">02</div><h3>Financial Smart Community</h3><p>Literasi keuangan, perlindungan konsumen, anti-scam dan keamanan transaksi.</p></div>
+  <div class="card program"><div class="num">03</div><h3>UMKM Go Digital & Market</h3><p>Digitalisasi, branding, marketplace, business matching dan akses pasar.</p></div>
+  <div class="card program"><div class="num">04</div><h3>Koperasi & Desa Produktif</h3><p>Penguatan tata kelola koperasi, BUMDes dan ekonomi desa.</p></div>
+  <div class="card program"><div class="num">05</div><h3>Generasi Muda Ekonomi</h3><p>Kewirausahaan, AI, ekonomi digital, bisnis dan kesiapan kerja.</p></div>
+  <div class="card program"><div class="num">06</div><h3>Rumah Aspirasi</h3><p>Penyerapan, verifikasi, penerusan dan monitoring aspirasi masyarakat.</p></div>
+  <div class="card program"><div class="num">07</div><h3>APBN & Public Oversight</h3><p>Edukasi APBN, forum kebijakan dan pemantauan layanan/program pemerintah.</p></div>
+  <div class="card program"><div class="num">08</div><h3>Data & Impact Center</h3><p>Database aspirasi, KPI, dashboard, policy brief dan laporan publik.</p></div>
+</div>
+</section>
+
+<section class="section" id="calendar">
+<div class="section-title"><h2>Kalender 12 Bulan</h2><span>Ringkasan fokus kegiatan</span></div>
+<div class="grid months">
+  <div class="card month"><h3>JANUARI · Pemetaan</h3><ul><li>Kick Off Dapil IX</li><li>Forum Aspirasi Kota Tegal</li><li>Klinik UMKM Kota Tegal</li><li>Survei Aspirasi Digital</li></ul></div>
+  <div class="card month"><h3>FEBRUARI · Keuangan</h3><ul><li>Financial Literacy Roadshow</li><li>Klinik KUR & Pembiayaan</li><li>Digitalisasi Pedagang Pasar</li><li>Perlindungan Konsumen</li></ul></div>
+  <div class="card month"><h3>MARET · Desa & Koperasi</h3><ul><li>Desa Ekonomi Produktif</li><li>Klinik Koperasi</li><li>Forum BUMDes</li><li>Brebes Economic Listening Forum</li></ul></div>
+  <div class="card month"><h3>APRIL · Pemuda</h3><ul><li>Young Entrepreneur Academy</li><li>AI for UMKM</li><li>Digital Business Bootcamp</li><li>Forum Pemuda & Lapangan Kerja</li></ul></div>
+  <div class="card month"><h3>MEI · UMKM Naik Kelas</h3><ul><li>UMKM Assessment 100</li><li>Packaging Clinic</li><li>Business Matching</li><li>Expo UMKM Dapil IX</li></ul></div>
+  <div class="card month"><h3>JUNI · APBN</h3><ul><li>APBN untuk Rakyat</li><li>Monitoring Program Pemerintah</li><li>Forum Pajak UMKM</li><li>Public Hearing Ekonomi</li></ul></div>
+  <div class="card month"><h3>JULI · Brebes</h3><ul><li>Brebes UMKM Upgrade</li><li>Klinik Pembiayaan</li><li>Koperasi Sehat Brebes</li><li>Forum Ekonomi Desa</li></ul></div>
+  <div class="card month"><h3>AGUSTUS · Keuangan Digital</h3><ul><li>Anti Scam Community</li><li>Sekolah Keuangan Keluarga</li><li>Financial Literacy for Women</li><li>Digital Finance for Youth</li></ul></div>
+  <div class="card month"><h3>SEPTEMBER · Ekonomi Rakyat</h3><ul><li>Dapil IX Cooperative Forum</li><li>Koperasi Digital</li><li>Desa Investment Literacy</li><li>Forum Nelayan & Pedagang Pesisir</li></ul></div>
+  <div class="card month"><h3>OKTOBER · Go Market</h3><ul><li>Business Matching II</li><li>Local Product Showcase</li><li>Marketplace Clinic</li><li>Export Readiness Clinic</li></ul></div>
+  <div class="card month"><h3>NOVEMBER · Aspirasi</h3><ul><li>Musyawarah Aspirasi Kota Tegal</li><li>Musyawarah Aspirasi Kab. Tegal</li><li>Musyawarah Aspirasi Brebes</li><li>Economic Policy Forum</li></ul></div>
+  <div class="card month"><h3>DESEMBER · Akuntabilitas</h3><ul><li>Impact Conference</li><li>UMKM Impact Day</li><li>Public Accountability Forum</li><li>Annual Report 2027</li></ul></div>
+</div>
+</section>
+
+<section class="section" id="activities">
+<div class="section-title"><h2>48 Kegiatan — Matriks Kerja</h2><span>Gunakan pencarian untuk menyaring kegiatan</span></div>
+<input class="search" id="search" placeholder="Cari kegiatan, bulan, wilayah, target, atau mitra...">
+<div class="tablewrap" style="margin-top:10px">
+<table id="activityTable">
+<thead><tr><th>#</th><th>Bulan</th><th>Kegiatan</th><th>Wilayah</th><th>Target</th><th>Output / Indikator</th><th>Kisaran biaya*</th></tr></thead>
+<tbody></tbody>
+</table></div>
+</section>
+
+<section class="section" id="regions">
+<div class="section-title"><h2>3 Wilayah Prioritas</h2><span>Pendekatan disesuaikan konteks wilayah</span></div>
+<div class="grid regions">
+  <div class="card region"><h3>Kota Tegal</h3><p>Fokus: ekonomi kota, UMKM, perdagangan, literasi keuangan, pemuda, forum publik dan digitalisasi usaha.</p></div>
+  <div class="card region"><h3>Kabupaten Tegal</h3><p>Fokus: UMKM, desa produktif, koperasi, pembiayaan, pasar, pemuda dan penguatan ekonomi lokal.</p></div>
+  <div class="card region"><h3>Kabupaten Brebes</h3><p>Fokus: UMKM, ekonomi desa, koperasi, pembiayaan, perdagangan, masyarakat pesisir dan aspirasi wilayah.</p></div>
+</div>
+</section>
+
+<section class="section" id="partners">
+<div class="section-title"><h2>Mitra Strategis</h2><span>Kolaborasi sesuai kewenangan masing-masing</span></div>
+<div class="card">
+  <span class="pill">DPR RI</span><span class="pill">Kementerian Keuangan</span><span class="pill">OJK</span>
+  <span class="pill">Bank Indonesia</span><span class="pill">LPS</span><span class="pill">BPS</span>
+  <span class="pill">DJP</span><span class="pill">DJBC</span><span class="pill">Pemprov Jawa Tengah</span>
+  <span class="pill">Pemkot Tegal</span><span class="pill">Pemkab Tegal</span><span class="pill">Pemkab Brebes</span>
+  <span class="pill">Perguruan Tinggi</span><span class="pill">Perbankan</span><span class="pill">Dunia Usaha</span>
+  <span class="pill">Komunitas</span><span class="pill">Asosiasi UMKM</span>
+</div>
+</section>
+
+<section class="section" id="aspirasi">
+<div class="section-title"><h2>Sistem Aspirasi: Dengar → Data → Tindaklanjut → Ukur</h2><span>Model status aspirasi</span></div>
+<div class="flow">
+  <div><b>01</b>Diterima</div><div><b>02</b>Diverifikasi</div><div><b>03</b>Diteruskan ke mitra</div>
+  <div><b>04</b>Menunggu / diproses</div><div><b>05</b>Selesai / berstatus jelas</div>
+</div>
+<div class="grid kpis" style="margin-top:12px">
+  <div class="card kpi"><div class="label">ASPIRASI TERDOKUMENTASI</div><div class="value">1.000+</div></div>
+  <div class="card kpi"><div class="label">TARGET STATUS TINDAK LANJUT</div><div class="value">≥80%</div></div>
+  <div class="card kpi"><div class="label">POLICY BRIEF</div><div class="value">≥4</div></div>
+  <div class="card kpi"><div class="label">LAPORAN PUBLIK</div><div class="value">1</div></div>
+</div>
+</section>
+
+<section class="section" id="kpi">
+<div class="section-title"><h2>KPI & Impact 2027</h2><span>Target perencanaan</span></div>
+<div class="card">
+  <p class="note">KPI berikut adalah target perencanaan, bukan data aktual. Ukuran utama diarahkan pada outcome dan tindak lanjut, bukan sekadar jumlah acara.</p>
+  <div style="margin-top:15px">
+    <div class="note">UMKM terjangkau · 3.000+</div><div class="bar"><i style="width:78%"></i></div>
+    <div class="note" style="margin-top:12px">Masyarakat literasi keuangan · 5.000+</div><div class="bar"><i style="width:82%"></i></div>
+    <div class="note" style="margin-top:12px">Pemuda · 1.500+</div><div class="bar"><i style="width:65%"></i></div>
+    <div class="note" style="margin-top:12px">Aspirasi berstatus tindak lanjut · ≥80%</div><div class="bar"><i style="width:80%"></i></div>
+  </div>
+</div>
+</section>
+
+<section class="section" id="budget">
+<div class="section-title"><h2>Konsep Anggaran</h2><span>Indikatif, bukan anggaran resmi DPR</span></div>
+<div class="grid budget">
+  <div class="card">
+    <h3>Skala kegiatan</h3>
+    <p class="note">Klinik/forum kecil: Rp30–80 juta</p>
+    <p class="note">Workshop: Rp50–125 juta</p>
+    <p class="note">Forum besar: Rp75–175 juta</p>
+    <p class="note">Expo/business matching: Rp100–250 juta</p>
+    <p class="note">Dashboard/data: Rp100–250 juta/tahun</p>
+  </div>
+  <div class="card">
+    <h3>Prinsip anggaran</h3>
+    <p class="note">Anggaran harus disesuaikan dengan standar biaya, mekanisme pengadaan, akun belanja, pertanggungjawaban, serta ketentuan APBN/Setjen DPR dan lembaga terkait yang berlaku pada 2027.</p>
+    <p class="note">Program pemerintah tidak diposisikan sebagai dana pribadi anggota DPR. Kegiatan dapat berupa representasi, koordinasi, edukasi, penyerapan aspirasi, atau kolaborasi sesuai kewenangan.</p>
+  </div>
+</div>
+</section>
+
+<section class="section" id="accountability">
+<div class="section-title"><h2>Akuntabilitas Publik</h2><span>Output akhir tahun</span></div>
+<div class="card">
+  <h3>DAPIL IX IMPACT REPORT 2027</h3>
+  <p class="note">Dokumen tahunan memuat 48 kegiatan, jumlah peserta, aspirasi yang masuk, kategori aspirasi, status tindak lanjut, mitra, hasil survei, policy brief, evaluasi KPI, serta rekomendasi program 2028.</p>
+  <div class="badges">
+    <span class="badge">48 kegiatan</span><span class="badge">Database aspirasi</span>
+    <span class="badge">KPI outcome</span><span class="badge">Policy brief</span><span class="badge">Annual report</span>
+  </div>
+</div>
+</section>
+
+<footer class="footer">
+  <b>DAPIL IX IMPACT 2027</b><br>
+  Dashboard ini merupakan konsep/master plan perencanaan kegiatan konstituen. Seluruh target, jadwal, mitra dan kisaran biaya perlu diverifikasi dan disesuaikan dengan kewenangan serta ketentuan resmi yang berlaku pada tahun 2027. Angka progres visual di atas adalah ilustrasi target, bukan data aktual.
+</footer>
+</main>
+
+<script>
+const activities = [
+["Januari","Kick Off Dapil IX 2027","Kota Tegal","150 peserta","Peta isu & ≥300 aspirasi","Rp75–125 jt"],
+["Januari","Forum Aspirasi Kota Tegal","Kota Tegal","100–150","Forum & dokumentasi aspirasi","Rp40–70 jt"],
+["Januari","Klinik UMKM Kota Tegal","Kota Tegal","100 UMKM","100 assessment; ≥50 pendampingan","Rp50–80 jt"],
+["Januari","Survei Aspirasi Digital","3 wilayah","Publik","Database aspirasi digital","Rp30–60 jt"],
+["Februari","Financial Literacy Roadshow","Kab. Tegal","300","Pre/post test literasi","Rp60–100 jt"],
+["Februari","Klinik KUR & Pembiayaan","Kab. Tegal","150 UMKM","100 assessment pembiayaan","Rp50–80 jt"],
+["Februari","Digitalisasi Pedagang Pasar","Kab. Tegal","200","QRIS & pencatatan usaha","Rp50–75 jt"],
+["Februari","Perlindungan Konsumen Keuangan","Kab. Tegal","250","Edukasi & kanal pengaduan","Rp50–80 jt"],
+["Maret","Desa Ekonomi Produktif","Brebes","10 desa","Peta potensi & kebutuhan","Rp75–125 jt"],
+["Maret","Klinik Koperasi","Brebes","100 pengurus","Tata kelola & pembukuan","Rp60–100 jt"],
+["Maret","Forum BUMDes & Pembiayaan","Brebes","50 unit","Assessment kebutuhan modal","Rp60–100 jt"],
+["Maret","Brebes Economic Listening Forum","Brebes","200","Peta masalah ekonomi","Rp50–90 jt"],
+["April","Young Entrepreneur Academy","Kota Tegal","200 pemuda","200 peserta; prototipe bisnis","Rp75–125 jt"],
+["April","AI for UMKM","Kota Tegal","150 UMKM","AI untuk konten & administrasi","Rp60–100 jt"],
+["April","Digital Business Bootcamp","Kota Tegal","100 pemuda","≥50 prototipe bisnis","Rp75–125 jt"],
+["April","Forum Pemuda & Lapangan Kerja","Kota Tegal","250","Forum dunia usaha","Rp50–90 jt"],
+["Mei","UMKM Assessment 100","Kab. Tegal","100 UMKM","Assessment 6 aspek","Rp75–125 jt"],
+["Mei","Product Packaging Clinic","Kab. Tegal","100 UMKM","Kemasan, label, katalog","Rp75–125 jt"],
+["Mei","Business Matching","Kota Tegal","150 UMKM+buyer","Temu buyer & pembiayaan","Rp100–175 jt"],
+["Mei","Expo UMKM Dapil IX","Kota Tegal","200 tenant","Pameran + transaksi/business matching","Rp150–250 jt"],
+["Juni","APBN untuk Rakyat","Kota Tegal","300","Edukasi APBN","Rp60–100 jt"],
+["Juni","Monitoring Program Pemerintah","Kab. Tegal","Publik","Laporan kendala layanan","Rp40–70 jt"],
+["Juni","Forum Pajak untuk UMKM","Kab. Tegal","200 UMKM","Edukasi perpajakan","Rp50–80 jt"],
+["Juni","Public Hearing Ekonomi Dapil IX","Kota Tegal","250","Policy brief","Rp75–125 jt"],
+["Juli","Brebes UMKM Upgrade","Brebes","200 UMKM","Assessment & pendampingan","Rp75–125 jt"],
+["Juli","Klinik Pembiayaan Brebes","Brebes","150 UMKM","Assessment pembiayaan","Rp50–90 jt"],
+["Juli","Koperasi Sehat Brebes","Brebes","100","Tata kelola koperasi","Rp60–100 jt"],
+["Juli","Forum Ekonomi Desa Brebes","Brebes","15 desa","Peta ekonomi desa","Rp75–125 jt"],
+["Agustus","Anti Scam Community","Kota Tegal","300","Edukasi anti-penipuan","Rp60–100 jt"],
+["Agustus","Sekolah Keuangan Keluarga","Kota Tegal","250 keluarga","Literasi pengelolaan uang","Rp50–80 jt"],
+["Agustus","Financial Literacy for Women","Kota Tegal","250","Literasi & usaha","Rp50–90 jt"],
+["Agustus","Digital Finance for Youth","Kota Tegal","300 pemuda","Keamanan transaksi digital","Rp50–90 jt"],
+["September","Dapil IX Cooperative Forum","Kab. Tegal","300","Forum koperasi","Rp75–125 jt"],
+["September","Koperasi Digital","Kab. Tegal","50 koperasi","Pembukuan/database digital","Rp75–125 jt"],
+["September","Desa Investment Literacy","Kab. Tegal","300","Investasi legal/ilegal","Rp50–90 jt"],
+["September","Forum Nelayan & Pedagang Pesisir","Kota Tegal","250","Pembiayaan & literasi","Rp60–100 jt"],
+["Oktober","Dapil IX Business Matching II","3 wilayah","200 UMKM","Temu buyer","Rp100–175 jt"],
+["Oktober","Local Product Showcase","3 wilayah","150 UMKM","Showcase produk","Rp100–175 jt"],
+["Oktober","Digital Marketplace Clinic","3 wilayah","200 UMKM","≥150 katalog/toko digital","Rp75–125 jt"],
+["Oktober","Export Readiness Clinic","3 wilayah","50 UMKM","Kesiapan ekspor","Rp75–125 jt"],
+["November","Musyawarah Aspirasi Kota Tegal","Kota Tegal","300","Aspirasi terpetakan","Rp60–100 jt"],
+["November","Musyawarah Aspirasi Kab. Tegal","Kab. Tegal","300","Aspirasi terpetakan","Rp60–100 jt"],
+["November","Musyawarah Aspirasi Brebes","Brebes","300","Aspirasi terpetakan","Rp60–100 jt"],
+["November","Dapil IX Economic Policy Forum","3 wilayah","300","Policy brief 2027–28","Rp75–125 jt"],
+["Desember","Dapil IX Impact Conference","Kota Tegal","300","Evaluasi tahunan","Rp100–175 jt"],
+["Desember","UMKM Impact Day","Kota Tegal","200","Studi kasus UMKM","Rp75–125 jt"],
+["Desember","Public Accountability Forum","Kota Tegal","300","Status aspirasi dipublikasikan","Rp60–100 jt"],
+["Desember","Dapil IX Annual Report 2027","3 wilayah","Publik","Laporan tahunan","Rp75–125 jt"]
+];
+
+const tbody=document.querySelector("#activityTable tbody");
+function render(filter=""){
+ tbody.innerHTML="";
+ activities.forEach((a,i)=>{
+   const row=a.join(" ").toLowerCase();
+   if(filter && !row.includes(filter.toLowerCase())) return;
+   const tr=document.createElement("tr");
+   tr.innerHTML=`<td>${i+1}</td><td>${a[0]}</td><td><b>${a[1]}</b></td><td>${a[2]}</td><td>${a[3]}</td><td>${a[4]}</td><td>${a[5]}</td>`;
+   tbody.appendChild(tr);
+ });
+}
+render();
+document.querySelector("#search").addEventListener("input",e=>render(e.target.value));
+
+const drawer=document.querySelector("#drawer"), overlay=document.querySelector("#overlay");
+function closeMenu(){drawer.classList.remove("open");overlay.classList.remove("show")}
+document.querySelector("#burger").addEventListener("click",()=>{drawer.classList.toggle("open");overlay.classList.toggle("show")});
+overlay.addEventListener("click",closeMenu);
+document.querySelectorAll(".drawer a").forEach(a=>a.addEventListener("click",closeMenu));
+</script>
+</body>
+</html>
